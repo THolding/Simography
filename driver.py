@@ -3,7 +3,7 @@
 """
 Created on Thu Jan 20 22:57:55 2021
 
-@author: verwirrt
+Example run using the Simology model
 """
 
 import matplotlib.pyplot as plt;
@@ -60,34 +60,24 @@ model.run(2000);
 ##################
 #### Plotting ####
 #mean fertility time series
-# plt.figure();
-# plt.plot(model.meanFertilityList);
-# plt.xlabel("time step (e.g. year)");
-# plt.ylabel("mean female lifetime fertility");
-# #mean number of eligible partners
+plt.figure();
+plt.plot(model.meanFertilityList);
+plt.xlabel("time step (e.g. year)");
+plt.ylabel("mean female lifetime fertility");
+#mean number of eligible partners
 plt.figure();
 plt.plot(model.meanEligiblePartnersListIndex, model.meanEligiblePartnersList);
 plt.xlabel("time step (e.g. year)");
 plt.ylabel("mean proportion of eligible partners");
-# #births and deaths
-# plt.figure();
-# #plt.plot(model.numBirthsList, 'b', label="births");
-# #plt.plot(model.numDeathsList, 'r', label="deaths");
-# plt.plot(np.array(model.numBirthsList)/np.array(model.numDeathsList), 'k', label="births / deaths");
-# plt.legend(loc=0);
-# plt.xlabel("time step (e.g. year)");
-# plt.ylabel("births divided by deaths");
+#births and deaths
+plt.figure();
+#plt.plot(model.numBirthsList, 'b', label="births");
+#plt.plot(model.numDeathsList, 'r', label="deaths");
+plt.plot(np.array(model.numBirthsList)/np.array(model.numDeathsList), 'k', label="births / deaths");
+plt.legend(loc=0);
+plt.xlabel("time step (e.g. year)");
+plt.ylabel("births divided by deaths");
 
 #population pyramid
 helpers.plot_pop_pyramid(model.population, nbins=20);
 
-
-
-popSizes = [100, 200, 300, 400, 500, 750, 1000, 1500];
-kinshipSystemDict = {"Minimal": kinship_systems.MinimalKinshipSystem,
-                      "Eskimo": kinship_systems.EskimoKinshipSystem,
-                      "Hawaiian": kinship_systems.HawaiianKinshipSystem
-                      };
-for kinshipSystem in ["Minimal", "Eskimo", "Hawaiian"]:
-    for popSize in popSizes:
-        
