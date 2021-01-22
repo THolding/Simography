@@ -82,4 +82,22 @@ for kinshipSystemName in ["Minimal", "Eskimo", "Hawaiian"]:
         finalPyramidOutputs[kinshipSystemName].append(meanPyramid);
         
         #helpers.plot_pop_pyramid(meanPyramid);
-            
+
+
+import matplotlib.pyplot as plt;
+plt.ioff(0);
+for name in kinshipSystemDict.keys():
+    np.savetxt(finalPopSizeOutputs[name], "output/final_pop_size_"+name+".csv", sep=",");
+    np.savetxt(finalPopSizeSDOutputs[name], "output/final_pop_size_sd_"+name+".csv", sep=",");
+    for i, df in enumerate(finalPyramidOutputs[name]):
+        helpers.plot_pop_pyramid(df, nbins=20);
+        plt.savefig("output/pyramids/pop_pyramid_{0}_{1}.png".format(name, popSizes[i]));
+        plt.close();
+plt.ion();
+plt.figure();
+plt.plot(popSizes, finalPopSizeOutputs["Minimal"], label="minimal");
+plt.plot(popSizes, finalPopSizeOutputs["Eskimo"], label="Eskimo");
+plt.plot(popSizes, finalPopSizeOutputs["Hawaiian"], label="Hawaiian");
+plt.xlabel("Initial population size (t=0)");
+plt.ylabel("Final population size (t=2000)");
+        
